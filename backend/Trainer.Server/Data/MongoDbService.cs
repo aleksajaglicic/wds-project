@@ -6,6 +6,7 @@
     {
         private readonly IConfiguration _configuration;
         private readonly IMongoDatabase? _database;
+
         public MongoDbService(IConfiguration configuration)
         {
             _configuration = configuration;

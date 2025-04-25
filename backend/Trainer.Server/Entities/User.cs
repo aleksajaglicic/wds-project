@@ -23,9 +23,22 @@
 
         [BsonElement("user_password")]
         [BsonRequired]
-        public string? PasswordHash { get; private set; }
+        public string? PasswordHash { get; set; }
 
         [BsonElement("workouts")]
         public List<ObjectId>? Workouts { get; set; } = new();
+
+        [BsonElement("role")]
+        public string? Role { get; set; }
+
+        //public User(string? name, string? lastName, string? email, string? passwordHash, List<ObjectId>? workouts, string? role)
+        //{
+        //    Name = name;
+        //    LastName = lastName;
+        //    Email = email;
+        //    PasswordHash = passwordHash;
+        //    Workouts = workouts;
+        //    Role = role;
+        //}
     }
 }

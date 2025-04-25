@@ -12,11 +12,9 @@
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IMongoCollection<User>? _customers;
         private readonly IUserService _userService;
-        public UserController(MongoDbService mongoDbService, UserService userService)
+        public UserController(UserService userService)
         {
-            _customers = mongoDbService.Database?.GetCollection<User>("user");
             _userService = userService;
         }
 
@@ -41,7 +39,7 @@
         public async Task<ActionResult> Create(User user)
         {
             var result = await _userService.CreateUserAsync(user);
-            return result ? Ok() : BadRequest();
+            return result ? Created() : BadRequest();
         }
     }
 }

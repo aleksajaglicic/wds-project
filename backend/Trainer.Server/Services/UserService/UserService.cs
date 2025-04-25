@@ -78,6 +78,21 @@
             return result is not null ? result : Enumerable.Empty<User>();
         }
 
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            User result = null;
+            try
+            {
+                result = await _users.Find(u => u.Email == email).FirstOrDefaultAsync();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
+        }
+
         public Task<User?> GetUserById(ObjectId? _objectId)
         {
             throw new NotImplementedException();

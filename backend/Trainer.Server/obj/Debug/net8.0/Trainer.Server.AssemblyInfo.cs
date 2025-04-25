@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Trainer.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4dbc523cf3ff697584fc7cbdc8601eff8fa58843")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e8dbebb3bdc0ec14f023992a7c07786d75610d6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Trainer.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Trainer.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

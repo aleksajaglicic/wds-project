@@ -11,5 +11,6 @@
         Task<bool> CreateUserAsync(User? user);
         Task<bool> UpdateUserAsync(User? user);
         Task<bool> DeleteUserAsync(ObjectId? _objectId);
+        Task<User?> GetUserByEmail(string email);
     }
 }
