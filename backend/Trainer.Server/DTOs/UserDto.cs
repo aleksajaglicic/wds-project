@@ -1,11 +1,13 @@
-﻿namespace Trainer.Server.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Trainer.Server.DTOs
 {
     public class UserDto
     {
-        public string? Id { get; private set; }
-        public string Name { get; }
-        public string? LastName { get; }
-        public string? Email { get; }
-        public string? Password { get; }
+        public string? Id { get; set; }
+        public string? Name { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
     }
 }

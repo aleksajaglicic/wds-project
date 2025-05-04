@@ -4,9 +4,13 @@
     
     public class MongoDbService
     {
+        #region Props
         private readonly IConfiguration _configuration;
+        public IMongoDatabase? Database => _database;
         private readonly IMongoDatabase? _database;
+        #endregion
 
+        #region Constructor
         public MongoDbService(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -16,7 +20,7 @@
             var mongoClient = new MongoClient(mongoUrl);
             _database = mongoClient.GetDatabase(mongoUrl.DatabaseName);
         }
+        #endregion
 
-        public IMongoDatabase? Database => _database;
     }
 }

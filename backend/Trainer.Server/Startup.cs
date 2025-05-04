@@ -22,6 +22,8 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
 
             //Dependency Injection
             services.AddScoped<MongoDbService>();
@@ -30,9 +32,8 @@
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IDtoMapper, DtoMapper>();
 
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
 
             //Jwt Authentication Setup
             services.AddAuthentication(options =>
@@ -55,6 +56,17 @@
                     };
                 });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddAuthorization();
         }
 
@@ -65,15 +77,18 @@
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors();
+            app.UseCors(options =>
+                options.WithOrigins("http://localhost:4200")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials());
+
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

@@ -9,12 +9,18 @@ namespace Trainer.Server.Services.TokenService
 {
     public class JwtTokenService : IJwtTokenService
     {
+        #region Props
         private readonly IConfiguration _configuration;
+        #endregion
+
+        #region Constructor
         public JwtTokenService(IConfiguration configuration) 
         {
             _configuration = configuration;
         }
+        #endregion
 
+        #region Methods
         public string GenerateToken(User user)
         {
             var claims = new List<Claim>
@@ -37,5 +43,6 @@ namespace Trainer.Server.Services.TokenService
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        #endregion
     }
 }

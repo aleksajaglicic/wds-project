@@ -1,0 +1,48 @@
+<div>
+    <div class="flex justify-end mb-2 m-16">
+        <button class="btn btn-primary" (click)="openCreateWorkoutModal()">Create Workout</button>
+        <app-create-workout-modal #createWorkoutModal (workoutCreated)="loadWorkouts()" />
+    </div>
+    <div class="overflow-x-auto text-center rounded-box border border-base-content/5 bg-base-100 mt-4 m-16">
+        <table class="table w-full">
+            <thead>
+                <tr class="bg-base-300 text-center">
+                    <th>#</th>
+                    <th>Workout Type</th>
+                    <th>Workout Date</th>
+                    <th>Duration (min)</th>
+                    <th>Calories Spent</th>
+                    <th>Tiredness</th>
+                    <th>Difficulty</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr *ngFor="let workout of workouts; let i = index" class="hover:bg-base-200">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ workout.workoutType }}</td>
+                    <td>{{ formatDate(workout.workoutDate) }}</td>
+                    <td>{{ workout.duration }}</td>
+                    <td>{{ workout.caloriesSpent }}</td>
+                    <td>{{ workout.tiredness }}</td>
+                    <td>{{ workout.difficulty }}</td>
+                    <td class="space-x-2">
+                        <button class="btn btn-md btn-primary" (click)="openEditWorkoutModal(workout)">Edit</button>
+                        <button class="btn btn-md btn-secondary" (click)="deleteWorkout(workout.id)">Delete</button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+        
+        <div class="space-x-2 mb-4 mt-2">
+            <button (click)="prevPage()" [disabled]="currentPage === 1" class="btn btn-md btn-secondary">Previous</button>
+            <button (click)="nextPage()" [disabled]="workouts.length < pageSize" class="btn btn-md btn-primary">Next</button>
+        </div>
+    </div>
+    <app-edit-workout-modal 
+        #editWorkoutModal 
+        [workout]="selectedWorkout!" 
+        (workoutUpdated)="loadWorkouts()" />
+
+</div>

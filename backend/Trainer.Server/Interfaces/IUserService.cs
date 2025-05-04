@@ -1,16 +1,17 @@
 ﻿namespace Trainer.Server.Interfaces
 {
-    using Microsoft.AspNetCore.Mvc;
     using MongoDB.Bson;
+    using Trainer.Server.DTOs;
     using Trainer.Server.Entities;
 
     public interface IUserService
     {
-        Task<User?> GetUserById(ObjectId? _objectId);
-        Task<IEnumerable<User>?> GetAll();
-        Task<bool> CreateUserAsync(User? user);
-        Task<bool> UpdateUserAsync(User? user);
-        Task<bool> DeleteUserAsync(ObjectId? _objectId);
+        Task<UserDto?> GetUserById(string? _objectId);
+        Task<IEnumerable<UserDto>?> GetAll();
+        Task<bool> CreateUserAsync(UserDto? user);
+        Task<UserDto?> UpdateUserAsync(UserDto? user);
         Task<User?> GetUserByEmail(string email);
+        Task<bool> InsertWorkoutId(ObjectId? workoutId, ObjectId? userId);
+        Task<bool> RemoveWorkoutId(string? workoutId, string? userId);
     }
 }

@@ -1,35 +1,96 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Serializers;
-using Trainer.Server.DTOs;
-using Trainer.Server.Entities;
-using Trainer.Server.Interfaces;
-
-namespace Trainer.Server.Helpers
+﻿namespace Trainer.Server.Helpers
 {
-    public class DtoMapper
+    using MongoDB.Bson;
+    using Trainer.Server.DTOs;
+    using Trainer.Server.Entities;
+    using Trainer.Server.Enums;
+    using Trainer.Server.Interfaces;
+
+    public class DtoMapper : IDtoMapper
     {
-        private readonly IPasswordHasher _hasher;
-
+        #region Constructor
         public DtoMapper() { }
+        #endregion
 
-        public User DtoToUser(UserDto dto)
+        #region UserMethods
+        public User ToEntity(UserDto userDto)
         {
-            if(dto != null)
+            if(userDto != null)
             {
-                var user = new User
+                return new User
                 {
-                    Name = dto.Name,
-                    LastName = dto.LastName,
-                    Email = dto.Email,
-                    PasswordHash = _hasher.HashPassword(dto.Password),
+                    Id = string.IsNullOrEmpty(userDto.Id) ? null : ObjectId.Parse(userDto.Id),
+                    Name = userDto.Name,
+                    LastName = userDto.LastName,
+                    Email = userDto.Email,
+                    PasswordHash = userDto.Password,
                     Role = "User",
-                    Workouts = null
+                    Workouts = new List<ObjectId>()
                 };
-
-                return user;
             }
 
             return null;
         }
+
+        public UserDto ToDto(User user)
+        {
+            if (user != null)
+            {
+                return new UserDto
+                {
+                    Name = user.Name,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Password = null
+                };
+            }
+
+            return new UserDto { };
+        }
+        #endregion
+
+        #region WorkoutMethods
+        public WorkoutDto ToWorkoutDto(Workout workout)
+        {
+            if (workout != null)
+            {
+                return new WorkoutDto
+                {
+                    Id = workout.Id.ToString(),
+                    UserId = workout.UserId.ToString(),
+                    Duration = workout.Duration,
+                    CaloriesSpent = workout.CaloriesSpent,
+                    Tiredness = workout.Tiredness,
+                    Difficulty = workout.Difficulty,
+                    WorkoutDate = workout.WorkoutDate.ToString("yyyy-MM-ddTHH:mm"),
+                    WorkoutType = workout.WorkoutType.ToString(),
+                    AdditionalNote = workout.AdditionalNote
+                };
+            }
+
+            return new WorkoutDto { };
+        }
+
+        public Workout ToWorkoutEntity(WorkoutDto workoutDto)
+        {
+            if (workoutDto != null)
+            {
+                return new Workout
+                {
+                    Id = string.IsNullOrEmpty(workoutDto.Id) ? null : ObjectId.Parse(workoutDto.Id),
+                    UserId = ObjectId.Parse(workoutDto.UserId),
+                    CaloriesSpent = workoutDto.CaloriesSpent,
+                    Duration = workoutDto.Duration,
+                    Tiredness = workoutDto.Tiredness,
+                    Difficulty = workoutDto.Difficulty,
+                    WorkoutDate = DateTime.Parse(workoutDto.WorkoutDate),
+                    WorkoutType = Enum.Parse<WorkoutType>(workoutDto.WorkoutType),
+                    AdditionalNote = workoutDto.AdditionalNote
+                };
+            }
+
+            return new Workout { };
+        }
+        #endregion
     }
 }

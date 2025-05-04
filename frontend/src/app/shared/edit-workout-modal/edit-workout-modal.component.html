@@ -1,0 +1,53 @@
+<dialog #editWorkoutModal class="modal">
+    <form method="dialog" *ngIf="workout" (ngSubmit)="updateWorkout()" class="modal-box w-11/12 max-w-2xl">
+        <h3 class="font-bold text-lg mb-4">Edit Workout</h3>
+    
+        <div class="form-control mb-2 space-x-4">
+            <label class="label">Workout Type</label>
+            <select class="select select-bordered" [(ngModel)]="workout.workoutType" name="workoutType" required>
+            <option *ngFor="let type of workoutTypes" [value]="type.value">
+                {{ type.label }}
+            </option>
+            </select>
+        </div>
+    
+        <div class="form-control mb-2 space-x-4">
+            <label class="label">Workout Date</label>
+                <input class="input input-bordered" type="datetime-local" [(ngModel)]="workout.workoutDate" name="workoutDate" required />
+            </div>
+    
+        <div class="form-control mb-2 space-x-4">
+            <label class="label">Duration (minutes)</label>
+            <input class="input input-bordered" type="number" [(ngModel)]="workout.duration" name="duration" required />
+        </div>
+    
+        <div class="form-control mb-2 space-x-4">
+            <label class="label">Calories Spent</label>
+            <input class="input input-bordered" type="number" [(ngModel)]="workout.caloriesSpent" name="caloriesSpent" required />
+        </div>
+    
+        <div class="form-control mb-2 space-x-4">
+            <label class="label">Tiredness</label>
+            <input type="range" min="1" max="10" class="range range-warning" [(ngModel)]="workout.tiredness" name="tiredness" />
+            <span>{{ workout.tiredness }}</span>
+        </div>
+    
+        <div class="form-control mb-4 space-x-4">
+            <label class="label">Difficulty</label>
+            <input type="range" min="1" max="10" class="range range-error" [(ngModel)]="workout.difficulty" name="difficulty" />
+            <span>{{ workout.difficulty }}</span>
+        </div>
+
+        <div class="form-control mb-4 space-x-4">
+            <label class="label">Additional notes</label>
+            <textarea class="textarea textarea-md resize-none" [(ngModel)]="workout.additionalNote" placeholder="Note" name="additionalNote">
+                <span>{{ workout.additionalNote }}</span>
+            </textarea>
+        </div>
+    
+        <div class="modal-action">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+        </div>
+    </form>
+</dialog>

@@ -1,12 +1,10 @@
-﻿using Trainer.Server.DTOs;
-using Trainer.Server.Entities;
-
-namespace Trainer.Server.Interfaces
+﻿namespace Trainer.Server.Interfaces
 {
+    using Trainer.Server.DTOs;
+    
     public interface IAuthService
     {
         Task<bool> RegisterAsync(UserDto dto);
         Task<string?> LoginAsync(UserLoginDto dto);
-        string GenerateToken(User user);
     }
 }

@@ -1,0 +1,13 @@
+<div *ngIf="isVisible" class="relative navbar bg-base-200 shadow-sm">
+    <div class="flex-1">
+        <a class="btn btn-ghost text-xl">Workout Note Taker</a>
+    </div>
+    <div class="flex-none">
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn rounded-2xl m-1">Profile</div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 shadow-xl">
+                <li class="text-red-500"><a (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

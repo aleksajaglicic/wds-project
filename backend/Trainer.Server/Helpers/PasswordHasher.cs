@@ -1,9 +1,10 @@
-﻿using Trainer.Server.Interfaces;
-
-namespace Trainer.Server.Helpers
+﻿namespace Trainer.Server.Helpers
 {
+    using Trainer.Server.Interfaces;
+
     public class PasswordHasher : IPasswordHasher
     {
+        #region Methods
         public string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
@@ -13,5 +14,6 @@ namespace Trainer.Server.Helpers
         {
             return BCrypt.Net.BCrypt.Verify(password, hash);
         }
+        #endregion
     }
 }

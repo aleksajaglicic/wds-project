@@ -1,0 +1,47 @@
+<div class="flex justify-end mb-2 m-16">
+    <div class="join join-horizontal space-x-4">
+        <h2 class="relative text-xl font-bold mb-2 ml-16">Weekly Workout Summary</h2>
+        <div>
+            <label for="monthSelect" class="block text-lg font-semibold">Select Month</label>
+            <select id="monthSelect" [(ngModel)]="month" (ngModelChange)="onMonthChange()" class="select select-secondary rounded-2xl w-full max-w-xs mt-2">
+                <option *ngFor="let month of availableMonths; let i = index" [value]="(i + 1)">
+                    {{ month }}
+                </option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="weekSelect" class="block text-lg font-semibold">Select Week</label>
+            <select id="weekSelect" [(ngModel)]="week" (ngModelChange)="onWeekChange()" class="select select-primary rounded-2xl w-full max-w-xs mt-2">
+                <option *ngFor="let week of [1, 2, 3, 4]" [value]="week">Week {{ week }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+    <div class="overflow-x-auto text-center rounded-box border border-base-content/5 bg-base-100 mt-4 m-16">
+    <table class="table w-full">
+        <thead>
+            <tr class="bg-base-300 text-center">
+            <th>Week</th>
+            <th>Total Duration</th>
+            <th>Workout Count</th>
+            <th>Average Tiredness</th>
+            <th>Average Difficulty</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!weeklySummary || !weeklySummary.weekNumber">
+                <td colspan="5" class="text-center">No data available</td>
+            </tr>
+            <tr *ngIf="weeklySummary" class="text-center">
+                <td>{{ weeklySummary.weekNumber }}</td>
+                <td>{{ weeklySummary.totalDuration }}</td>
+                <td>{{ weeklySummary.workoutCount }}</td>
+                <td>{{ weeklySummary.avgTiredness | number:'1.0-0' }}</td>
+                <td>{{ weeklySummary.avgDifficulty | number:'1.0-0' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

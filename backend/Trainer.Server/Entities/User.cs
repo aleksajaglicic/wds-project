@@ -7,7 +7,7 @@
     {
         [BsonId]
         [BsonElement("_id")]
-        public ObjectId? Id { get; private set; }
+        public ObjectId? Id { get; set; }
 
         [BsonElement("user_name")]
         [BsonRequired]
@@ -30,15 +30,5 @@
 
         [BsonElement("role")]
         public string? Role { get; set; }
-
-        //public User(string? name, string? lastName, string? email, string? passwordHash, List<ObjectId>? workouts, string? role)
-        //{
-        //    Name = name;
-        //    LastName = lastName;
-        //    Email = email;
-        //    PasswordHash = passwordHash;
-        //    Workouts = workouts;
-        //    Role = role;
-        //}
     }
 }
