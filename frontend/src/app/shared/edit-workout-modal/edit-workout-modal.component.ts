@@ -40,10 +40,6 @@ export class EditWorkoutModalComponent implements OnInit {
         this.workout.workoutDate = this.datePipe.transform(this.workout.workoutDate, 'M/d/yyyy HH:mm') || '';
       }
     }
-    
-    
-    
-  
 
     updateWorkout() {
       this.workoutService.editWorkout(this.workout).subscribe({
