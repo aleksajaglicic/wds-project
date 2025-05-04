@@ -11,6 +11,6 @@ export interface RegisterRequest {
 }
 
 export interface JwtPayload {
-    [key: string]: any;  // Allowing any property with any value
+    [key: string]: any;
     exp: number;
 }
